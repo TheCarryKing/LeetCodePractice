@@ -2,22 +2,25 @@ package com.xuthus.algo;
 
 import java.nio.BufferUnderflowException;
 import java.util.Comparator;
+import java.util.List;
 
 /**
  * 二叉查找树
+ *
  * @param <T>
+ * @author Administrator
  */
-public class BinarySearchTree<T extends Comparable< ? super T>> {
+public class BinarySearchTree<T extends Comparable<? super T>> implements IBinarySearchThree<T> {
 
     /**
-     *二分查找树的根节点
+     * 二分查找树的根节点
      */
     private BinaryNode<T> root;
 
     /**
      * 比较工具
      */
-    private Comparator< ? super T> comparator;
+    private Comparator<? super T> comparator;
 
     public BinarySearchTree() {
         this.root = null;
@@ -38,28 +41,33 @@ public class BinarySearchTree<T extends Comparable< ? super T>> {
     /**
      * 判断是否是空树
      */
-    public boolean isEmpty(){
+    @Override
+    public boolean isEmpty() {
         return root == null;
     }
 
     /**
      * 将当前树置空
      */
-    public void makeEmpty(){
+    @Override
+    public void makeEmpty() {
         this.root = null;
     }
 
     /**
      * 当前树是否包含指定节点
+     *
      * @param data 指定的数据
      * @return 是否包含指定数据
      */
+    @Override
     public boolean contains(T data) {
         return contains(root, data);
     }
 
     /**
      * 当前树是否包含指定节点
+     *
      * @param data 指定的数据
      * @return 是否包含指定数据
      */
@@ -80,8 +88,10 @@ public class BinarySearchTree<T extends Comparable< ? super T>> {
 
     /**
      * 获取当前树下全部节点的最小值
+     *
      * @return 当前树下全部节点的最小值
      */
+    @Override
     public T findMin() {
         if (isEmpty()) {
             throw new BufferUnderflowException();
@@ -89,8 +99,10 @@ public class BinarySearchTree<T extends Comparable< ? super T>> {
         return findMin(root).data;
     }
 
+
     /**
      * 获取当前树下全部节点的最小值对应的节点
+     *
      * @param root 当前树的根节点
      * @return 当前树下全部节点的最小值对应的节点
      */
@@ -106,8 +118,10 @@ public class BinarySearchTree<T extends Comparable< ? super T>> {
 
     /**
      * 获取当前树下全部节点的最大值
+     *
      * @return 当前树下全部节点的最大值
      */
+    @Override
     public T findMax() {
         if (isEmpty()) {
             throw new BufferUnderflowException();
@@ -117,6 +131,7 @@ public class BinarySearchTree<T extends Comparable< ? super T>> {
 
     /**
      * 获取当前树下全部节点的最大值对应的节点
+     *
      * @param root 当前树的根节点
      * @return 当前树下全部节点的最大值对应的节点
      */
@@ -132,23 +147,26 @@ public class BinarySearchTree<T extends Comparable< ? super T>> {
 
     /**
      * 向当前树插入指定数据节点
+     *
      * @param data 指定数据
      * @return 返回对应的节点
      */
-    public BinaryNode<T> insert(T data){
-        return insert( this.root, data);
+    @Override
+    public BinaryNode<T> insert(T data) {
+        return insert(this.root, data);
     }
 
     /**
      * 向指定根节点插入指定数据节点
      * 判断当前数据是不是已经存在，已经存在则不需要插入，不存在则进行插入
+     *
      * @param root 指定根节点
      * @param data 指定数据
      * @return 返回更新后的根节点
      */
     private BinaryNode<T> insert(BinaryNode<T> root, T data) {
         if (root == null) {
-            return new BinaryNode<T>(data, null, null);
+            return new BinaryNode<>(data, null, null);
         }
 
         int compareResult = compareData(data, root.data);
@@ -163,22 +181,25 @@ public class BinarySearchTree<T extends Comparable< ? super T>> {
 
     /**
      * 删除指定数据
+     *
      * @param data 指定数据
      * @return 更新后的节点
      */
-    public BinaryNode<T> remove(T data){
-        return remove( root, data);
+    @Override
+    public BinaryNode<T> remove(T data) {
+        return remove(root, data);
     }
 
     /**
      * 删除指定节点下的指定数据
+     *
      * @param root 指定的根节点
      * @param data 指定的数据
      * @return 更新后的节点
      */
     private BinaryNode<T> remove(BinaryNode<T> root, T data) {
         if (root == null) {
-            return root;
+            return null;
         }
 
         int compareResult = compareData(data, root.data);
@@ -195,5 +216,20 @@ public class BinarySearchTree<T extends Comparable< ? super T>> {
         }
 
         return root;
+    }
+
+    @Override
+    public List<T> preOrderTraversal() {
+        return null;
+    }
+
+    @Override
+    public List<T> inOrderTraversal() {
+        return null;
+    }
+
+    @Override
+    public List<T> postOrderTraversal() {
+        return null;
     }
 }
